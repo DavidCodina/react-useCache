@@ -39,7 +39,7 @@ function HomePage(props){
       </div>
 
 
-      <p>The <code>useCache()</code> hook is built on top of Axios. It provides fetching, caching, and
+      <p>The <code>useCache()</code> hook is built on top of Axios. It provides fetching, caching,
       cache-busting, and cache-clearing functionality.</p>
 
 
