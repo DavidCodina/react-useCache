@@ -33,7 +33,7 @@ function Home(props){
       return <h1 className="text-pink text-center" style={{ fontFamily: 'Montserrat', textShadow: '0px 1px 2px rgba(0,0,0,0.25' }}>An error occurred!</h1>
     }
 
-    else if (showData){
+    if (showData){
       return (
         <React.Fragment>
           { 

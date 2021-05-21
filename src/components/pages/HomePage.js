@@ -313,9 +313,9 @@ function HomePage(props){
   
   
     const renderPosts = () => {
-      if (showSpinner){   return ... } 
-      if (showError){     return ... }
-      else if (showData){ return ... }
+      if (showSpinner){ return ... } 
+      if (showError){   return ... }
+      if (showData){    return ... }
       return null; 
     };
   

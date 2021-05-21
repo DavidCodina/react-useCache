@@ -47,7 +47,7 @@ function PostsPage(props){
       return <h1 className="text-pink text-center" style={{ fontFamily: 'Montserrat', textShadow: '0px 1px 2px rgba(0,0,0,0.25' }}>An error occurred!</h1>
     }
 
-    else if (showData){
+    if (showData){
       return (
         <ul className="users-list w-90 mx-auto mb-5 list-group list-group-flush border border-dark rounded-3 shadow-sm overflow-hidden">
           {
