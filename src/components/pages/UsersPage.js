@@ -5,46 +5,14 @@ import Spinner              from '../Spinner';
 function Home(props){
   const { value: { fetchUsersData, fetchUsers } } = props;
   const { loading: loadingUsers,  loaded: loadedUsers, data: usersData, error: usersDataError } = fetchUsersData;
-  const showSpinner = loadingUsers && !loadedUsers;
+  const showSpinner = loadingUsers   && !loadedUsers;
   const showError   = usersDataError && !loadingUsers && !loadedUsers;
-  ////////////////////////////////////////////////////////////////////////////
-  //
-  //  Checking for an Array when you expect an array is a good pattern.
-  //  Why? Because there is a rare gotcha in the unlikely event of a 404 Not Found Error
-  //  GENERATE BY THE BROWSER. res.data becomes {}, and this can potentially break the UI
-  //  map() method when the expected data is an array.
-  //  Such a situation might be also be a good place for an error boundary.
-  //
-  ////////////////////////////////////////////////////////////////////////////
-  const showData    = (loadedUsers) && Array.isArray(usersData) && usersData.length > 0; // Choosing not to show error if cached data exists.
+  const showData    = (loadedUsers)  && Array.isArray(usersData) && usersData.length > 0; // Choosing not to show error if cached data exists.
+
 
   const getUsers = () => {
-    // Test error handling
-    // if (cachedUsers){
-    //   // There is a difference between a 404 coming from the website, and a 404 coming from the browser
-    //   // fetchUsers('http://httpstat.us/404');                      // usersDataError: {code: 404, description: "Not Found"}
-    //   // fetchUsers('https://jsonplaceholder.typicode.com/uzers');  // usersDataError: {}  
-    //   return;
-    // }
-    // fetchUsers('http://httpstat.us/404'); 
     fetchUsers('https://jsonplaceholder.typicode.com/users');
   };
-
-
-  // https://github.com/facebook/create-react-app/issues/6880
-  // useEffect(() => getUsers(), []); // eslint-disable-line react-hooks/exhaustive-deps
-  // useEffect(() => { console.log("usersData: ", usersData); }, [usersData]);
-
-
-  useEffect(() => {
-    // Currently Axios will not throw errors regardless of status code, 
-    // but useRefreshNowCache() will create an error for 300+ status codes.
-    // I prefer handling it myself, rather than letting Axios automate it.
-    // Should I do something with the error?
-    if (usersDataError){
-      console.error("usersDataError: ", usersDataError);
-    }  
-  }, [usersDataError]);
 
 
   const renderUserInfo = () => {
@@ -82,7 +50,6 @@ function Home(props){
       );
     }
 
-    
     return null; // This should never happen.
   };
 

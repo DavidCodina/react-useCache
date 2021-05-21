@@ -1,6 +1,5 @@
 import React from 'react'; 
-// This component works in conjunction with bootstrap-icons.css,
-// and bootstrap-icons.woff2 / woff
+// This component works in conjunction with bootstrap-icons.css, and bootstrap-icons.woff2 / woff
 
 
 function Icon({ 

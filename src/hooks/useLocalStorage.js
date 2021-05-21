@@ -1,29 +1,3 @@
-// import { useState } from 'react';
-
-// // This version is from the ionic biorhythm calculator.
-// export function useLocalStorage2(key, defaultValue){
-//   function getInitialValue(){
-//     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
-//     return localStorage.getItem(key) ?? defaultValue;
-//   }
-
-
-//   const [value, setValue] = useState(getInitialValue);
-
-
-//   function setAndStoreValue(newValue){
-//     setValue(newValue);
-//     localStorage.setItem(key, newValue);
-//   }
-
-//   return [value, setAndStoreValue];
-// }
-
-
-
-
-// This version is from React/Resources/Videos/finished-products/codepen-like-editor-2021
-// https://www.youtube.com/watch?v=wcVxX7lu2d4
 import { useEffect, useState } from 'react';
 
 
@@ -49,7 +23,6 @@ function useLocalStorage(key, initialValue){
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value)); 
   }, [key, value]);                                 
-
 
   return [value, setValue];
 }

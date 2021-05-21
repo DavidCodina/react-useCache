@@ -69,7 +69,7 @@ function PostsPage(props){
       );
     }
 
-    return null; // This should never happen.
+    return null; 
   };
 
 

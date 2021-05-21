@@ -11,8 +11,6 @@ export const Context  = createContext({});
 export const Consumer = Context.Consumer;
 
 
-// React.createContext() returns an object with a Provider and a Consumer.
-// The Provider is used here within the Custom Provider, but THEY ARE NOT THE SAME THING.
 export const Provider = (props) => {
 
   ////////////////////////////////////////////////////////////////////////////
@@ -42,9 +40,9 @@ export const Provider = (props) => {
   //
   ////////////////////////////////////////////////////////////////////////////
 
-  //! I need to name these different -like usersCacheState, etc.
+
   const [ fetchUsersData, fetchUsers ] = useCache(1000 * 60); 
-  const [ fetchPostsData, fetchPosts ] = useCache(1000 * 60); // This is overfetching, but oh well...
+  const [ fetchPostsData, fetchPosts ] = useCache(1000 * 60); 
   const [ fetchPostData,  fetchPost  ] = useCache(1000 * 60); 
 
 
