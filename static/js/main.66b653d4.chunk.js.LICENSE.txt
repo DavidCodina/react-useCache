@@ -1,3 +1,0 @@
-//! I need to name these different -like usersCacheState, etc.
-
-//! If using HashRouter and no url is passed you have to use 'hash'.
