@@ -42,7 +42,7 @@ export const Provider = (props) => {
 
 
   const [ fetchUsersData, fetchUsers ] = useCache(1000 * 60); 
-  const [ fetchPostsData, fetchPosts ] = useCache(1000 * 60); 
+  const [ fetchPostsData, fetchPosts, clearPostsDataByKey ] = useCache(1000 * 60); 
   const [ fetchPostData,  fetchPost  ] = useCache(1000 * 60); 
 
 
@@ -50,7 +50,7 @@ export const Provider = (props) => {
     <Context.Provider 
       value={{ 
         fetchUsersData, fetchUsers,
-        fetchPostsData, fetchPosts,
+        fetchPostsData, fetchPosts, clearPostsDataByKey,
         fetchPostData,  fetchPost
       }}
     >

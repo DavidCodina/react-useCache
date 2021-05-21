@@ -1,6 +1,5 @@
 import { useReducer, useRef } from 'react';
 import axios                  from 'axios';
-
 axios.defaults.validateStatus = function(status){ return true; }; // Default: return status >= 200 && status < 300; 
 
 
@@ -119,8 +118,6 @@ const useCache = (maxAge = 1000 * 60 * 5) => {
   const fetchData = (url, config = null, forceRefresh = false) => {
     if (!url){ return; }
     if (state.loading){ return; }
-
-    
     dispatch({ type: 'LOADING' });
 
     
@@ -145,21 +142,27 @@ const useCache = (maxAge = 1000 * 60 * 5) => {
           setTimeout(function(){
             const now         = createTimestamp(); 
             const dataExpired = exceedsMaxAge(cache.current[url].cachedAt, now, maxAge);
-            if (dataExpired){
-              delete cache.current[url];
-            } 
+            if (dataExpired){ delete cache.current[url]; } 
           }, maxAge + 1000);
         } else {
+          // Axios is currently set up such that NO STATUS CODE WILL GO TO THE CATCH BLOCK.
           dispatch({ type: 'ERROR', payload: res.data });
         }
       })
       .catch(err => {
-        dispatch({ type: 'ERROR', payload: err }); 
+        dispatch({ type: 'ERROR', payload: err });
       });
     }, 1000);
   };
 
-  return [ state, fetchData ];
+
+  const clearCacheByKey = (key) => {
+    console.log("Deleted cached data with key of: ", key);
+    delete cache.current[key];
+  };
+
+
+  return [ state, fetchData, clearCacheByKey ];
 };
 
 

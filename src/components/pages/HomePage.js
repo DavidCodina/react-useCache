@@ -7,10 +7,15 @@ import React from 'react';
 
 
 function HomePage(props){
+  const { value: { clearPostsDataByKey  } } = props;
+
 
 
   const forceRefreshPosts = () => props.history.push({ pathname: '/posts', search: '?forceRefresh=true' });
   const goToPosts         = () => props.history.push('/posts');
+  const clearPosts        = () => {
+    clearPostsDataByKey('https://jsonplaceholder.typicode.com/posts?_limit=10');
+  };
   
   return (
     <article className="mt-5 article">
@@ -22,7 +27,8 @@ function HomePage(props){
 
       <div className="text-center">
         <button className="btn btn-outline-gray me-3" onClick={forceRefreshPosts} style={{ minWidth: 160 }}>Force Refresh Posts</button>
-        <button className="btn btn-outline-gray"      onClick={goToPosts} style={{ minWidth: 160 }}>Go To Posts</button>
+        <button className="btn btn-outline-gray me-3" onClick={goToPosts} style={{ minWidth: 160 }}>Go To Posts</button>
+        <button className="btn btn-outline-gray"      onClick={clearPosts} style={{ minWidth: 160 }}>Clear Posts</button>
       </div>
 
 
@@ -34,7 +40,7 @@ function HomePage(props){
 
 
       <p>The <code>useCache()</code> hook is built on top of Axios. It provides fetching, caching, and
-      cache-busting functionality.</p>
+      cache-busting, and cache-clearing functionality.</p>
 
 
       <pre><code>{`
@@ -224,6 +230,16 @@ function HomePage(props){
       `}</code></pre>
 
 
+      <div className="horizontal-ruler">
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+      </div>
+
+
+      <h3 className="text-gray">Usage:</h3>
+
+
       <p>It is important that the hook be implemented at a higher level than
       the component presenting the data. The current demo implements the hook 
       inside of Context.js:</p>
@@ -315,9 +331,21 @@ function HomePage(props){
 
       <p>When cached data exists, it will attempt to show that data instead of making a 
       new API request. However, if the cached data has exceeded <code>maxAge</code> a
-      new API request will be made and the cache will be updated. Additionally, one
-      may pass <code>?forceRefresh=true</code>. Then on the associated page some 
-      code should be set up to check for query parameters:</p>
+      new API request will be made and the cache will be updated.</p>
+
+
+      <div className="horizontal-ruler">
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+        <hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
+      </div>
+      
+
+      <h3 className="text-gray">Force Refreshing:</h3>
+
+
+      <p>One may pass the <code>?forceRefresh=true</code> query string parameter. 
+      Then on the associated page some  code could be set up to check for query parameters:</p>
 
 
       <pre><code>{`
@@ -340,13 +368,22 @@ function HomePage(props){
       <p>With this setup one can force a data refresh. This is especially important after a user has 
       updated their information and is programmatically redirected to the corresponding page. Otherwise,
       it will <em>appear</em> as though the <code>POST</code>, <code>PUT</code>, <code>PATCH</code>,
-      or <code>DELETE</code> reqiests did not occur. For other caching solutions 
+      or <code>DELETE</code> reqiests did not occur.</p>
+
+
+      <p>But what if the user is not programmatically redirected?
+      A better solution would simply be to clear the cached data at the same time that the request was
+      determined to be successful. This can be done using <code>clearCacheByKey(<em>key</em>)</code>.
+      Once that piece of cached data is cleared, then we know that the next time the user attempts
+      to access that data a fresh request will be made. This also avoids the annoying affect of a user
+      going <em>back</em> to a page that was force refreshed with <code>?forceRefesh=true</code>, and having it reload unnecessarily.</p>
+
+
+      <p>For other caching solutions 
       see <a href="https://react-query.tanstack.com" target="_blank" rel="noreferrer">React Query</a> and <a href="https://swr.vercel.app" target="_blank" rel="noreferrer">SWR</a>.</p>
 
 
-      <p>I don't know if it's possible, but one might also try to 
-      remove <code>?forceRefesh=true</code> in cases where the user is going back using the 
-      browser's back button.</p>
+      
 
 
       <p><strong>Note:</strong> this system will not persist data across refreshes.
