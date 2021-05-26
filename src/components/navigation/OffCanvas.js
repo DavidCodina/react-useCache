@@ -1,20 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-///////////////////////////////////////////////////////////////////////////////
-//
-//  Bootstrap also uses an .offcanvas-toggling class.
-//  This class has no associated CSS selector.
-//  Presumably, it is used kind of like a state variable such
-//  that internally it is part of if checks in various methods.
-//  I don't see any need for it. In theory it would prevent the menu
-//  from opening/closing while it was closing/opening. However, that
-//  behavior is fine with me.
-//
-//  For this implementation, I am reaching directly into the DOM.
-//  This just seemed like the easiest approach, albeit not the 'React way'.
-//  One could instead conditionally apply the classes and styles to the JSX.
-//  That said, you'd still have to apply styles to the DOM for the body.
-//
-///////////////////////////////////////////////////////////////////////////////
 
 
 function OffCanvas({
@@ -31,7 +15,7 @@ function OffCanvas({
 
   const html                                      = document.getElementsByTagName('html')[0];
   const body                                      = document.getElementsByTagName('body')[0]; 
-  const transitionDuration                        = 300; // Mataches Bootstrap CSS transition duration.
+  const transitionDuration                        = 300; // Matches Bootstrap CSS transition duration.
   const offCanvasRef                              = useRef();
   const togglerRef                                = useRef();
   const backdropRef                               = useRef();
@@ -84,9 +68,10 @@ function OffCanvas({
       setOffCanvasVisible(true);
     }
   };
+  
 
-
-  const hideOffCanvas = () => {
+  //* Trick for exposing internal functions!!!
+  OffCanvas.hideOffCanvas = () => {
     if (!offCanvasRef.current){ return; }
     const offCanvas = offCanvasRef.current;
 
@@ -112,15 +97,16 @@ function OffCanvas({
       }, 250); // Based on App.css :  .modal-backdrop.fade { transition: opacity 0.25s linear; }
     }
   };
+  const { hideOffCanvas } = OffCanvas;
 
 
   const toggleOffCanvas = () => {
     if (!offCanvasRef.current){ return; }
     const offCanvas = offCanvasRef.current;
     if  (!offCanvas.classList.contains('show')){ 
-      showOffCanvas(offCanvas); 
+      showOffCanvas(); 
     } else if (offCanvas.classList.contains('show')){  
-      hideOffCanvas(offCanvas); 
+      hideOffCanvas(); 
     }
   }
 

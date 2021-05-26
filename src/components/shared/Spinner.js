@@ -12,7 +12,7 @@ function isEmpty(obj){
 // will still cause the spinner to render with a <div> wrapper.
 // In the absence of any other styling, the spinner will default to the currentColor
 // of the parent element.
-function Spinner({ 
+export function Spinner({ 
   variant          = '',
   classes          = '',
   size             = 50, 
@@ -63,6 +63,3 @@ function Spinner({
 
   return renderSpinner();
 }
-
-
-export default Spinner;

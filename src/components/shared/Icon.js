@@ -1,11 +1,12 @@
 import React from 'react'; 
-// This component works in conjunction with bootstrap-icons.css, and bootstrap-icons.woff2 / woff
+// This component works in conjunction with bootstrap-icons.css,
+// and bootstrap-icons.woff2 / woff
 
 
-function Icon({ 
+export function Icon({ 
   name    = 'question-circle', 
-  size    = 16, 
-  color   = '#333', 
+  size    = 'inherit', 
+  color   = 'currentColor', 
   classes = '',
   style   = {} 
 }){
@@ -17,6 +18,3 @@ function Icon({
     ></i>   
   );
 }
-
-
-export default Icon;

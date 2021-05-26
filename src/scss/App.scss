@@ -42,6 +42,8 @@ body {
 }
 
 main {
+  /* min-height: 100vh; /* Don't do this.
+  Instead set display:flex; flex-direction:column; on body, then flex:1 here. */
   flex: 1;
 }
 
