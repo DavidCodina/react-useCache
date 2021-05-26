@@ -83,10 +83,10 @@ export function UsersPage(props){
       <h2 className="my-5 text-white-3d text-center">Users</h2>
 
 
-      <p>In the following example, it is important to note the <code>fetchData()</code> does
+      <p>In the following example, it is important to note that <code>fetchData()</code> does
       not force refetch. In other words, it will not make an API request if cached data exists.
-      To force the refetch, first call <code>remove()</code> then call <code>fetchData()</code>. 
-      <code>remove()</code> removes a subset of the entire cache using the associated <code>queryKey</code>.  
+      To force the refetch, first call <code>remove()</code> then call <code>fetchData()</code>. <code>remove()</code> removes 
+      a subset of the entire cache using the associated <code>queryKey</code>.  
       <code>remove()</code> is not removing the local <code>cacheState</code>. The means that the
       local UI state is unaffected by underlying cache deletions. This is also why the Remove Users button below
       does not remove the Users list from the UI when clicked.</p>
