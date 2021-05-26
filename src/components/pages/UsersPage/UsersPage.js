@@ -85,10 +85,11 @@ export function UsersPage(props){
 
       <p>In the following example, it is important to note the <code>fetchData()</code> does
       not force refetch. In other words, it will not make an API request if cached data exists.
-      To force the refetch, you would first want to call <code>remove()</code> then <code>fetchData()</code>. 
-      With <code>remove()</code> it is important to note that it is removing a subset of the 
-      entire cache. Moreover, it is not removing the local <code>cacheState</code> 
-      that <code>useCache()</code> relies on.</p>
+      To force the refetch, first call <code>remove()</code> then call <code>fetchData()</code>. 
+      <code>remove()</code> removes a subset of the entire cache using the associated <code>queryKey</code>.  
+      <code>remove()</code> is not removing the local <code>cacheState</code>. The means that the
+      local UI state is unaffected by underlying cache deletions. This is also why the Remove Users button below
+      does not remove the Users list from the UI when clicked.</p>
 
 
       <div className="horizontal-ruler">
